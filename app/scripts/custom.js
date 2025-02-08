@@ -122,65 +122,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Don't jump when empty links
-const emptyHref = document.querySelectorAll('a[href="#"]');
-emptyHref.forEach(el => el.addEventListener('click', e => {
-    e.preventDefault();
-    return false;
-}));
+		const emptyHref = document.querySelectorAll('a[href="#"]');
+		emptyHref.forEach(el => el.addEventListener('click', e => {
+			e.preventDefault();
+			return false;
+		}));
 
-// Opening Submenu
-function submenus() {
-    var subTrigger = document.querySelectorAll('[data-submenu]');
-    if (subTrigger.length) {
-        subTrigger.forEach(el => {
-            // For desktop and mobile, use 'click' event for dropdowns
-            el.addEventListener('click', function(e) {
-                // Prevent the default action of the anchor tag
-                e.preventDefault();
+		// Opening Submenu
+		function submenus() {
+			var subTrigger = document.querySelectorAll('[data-submenu]');
+			if (subTrigger.length) {
+				subTrigger.forEach(el => {
+					// For desktop and mobile, use 'click' event for dropdowns
+					el.addEventListener('click', function(e) {
+						// Prevent the default action of the anchor tag
+						e.preventDefault();
 
-                // Get the submenu ID
-                const subData = el.getAttribute('data-submenu');
-                var subId = document.querySelector('#' + subData);
+						// Get the submenu ID
+						const subData = el.getAttribute('data-submenu');
+						var subId = document.querySelector('#' + subData);
 
-                // Calculate submenu height
-                var subIdNodes = subId.querySelectorAll('a');
-                var subChildren = subIdNodes.length;
-                var subHeight = subChildren * 43;
+						// Calculate submenu height
+						var subIdNodes = subId.querySelectorAll('a');
+						var subChildren = subIdNodes.length;
+						var subHeight = subChildren * 43;
 
-                // Toggle the submenu's visibility
-                if (el.classList.contains('submenu-active')) {
-                    subId.style.height = '0px';
-                    el.classList.remove('submenu-active');
-                } else {
-                    subId.style.height = subHeight + 'px';
-                    el.classList.add('submenu-active');
-                }
+						// Toggle the submenu's visibility
+						if (el.classList.contains('submenu-active')) {
+							subId.style.height = '0px';
+							el.classList.remove('submenu-active');
+						} else {
+							subId.style.height = subHeight + 'px';
+							el.classList.add('submenu-active');
+						}
 
-                // Stop event propagation
-                e.stopPropagation();
-                return false;
-            });
-        });
-    }
-}
+						// Stop event propagation
+						e.stopPropagation();
+						return false;
+					});
+				});
+			}
+		}
 
-// Activate Selected Menu
-function activatePage() {
-    var activeMenu = document.querySelectorAll('[data-menu-active]');
-    if (activeMenu.length) {
-        var activeData = activeMenu[0].getAttribute('data-menu-active');
-        var activeID = document.querySelector('#' + activeData);
-        activeID.classList.add('list-group-item-active');
-        if (activeID.parentNode.classList.contains('list-submenu')) {
-            var triggerSub = activeID.parentNode.getAttribute('id');
-            document.querySelector('[data-submenu="' + triggerSub + '"]').classList.add('submenu-active');
-            submenus();
-        }
-    }
-}
+		// Activate Selected Menu
+		function activatePage() {
+			var activeMenu = document.querySelectorAll('[data-menu-active]');
+			if (activeMenu.length) {
+				var activeData = activeMenu[0].getAttribute('data-menu-active');
+				var activeID = document.querySelector('#' + activeData);
+				activeID.classList.add('list-group-item-active');
+				if (activeID.parentNode.classList.contains('list-submenu')) {
+					var triggerSub = activeID.parentNode.getAttribute('id');
+					document.querySelector('[data-submenu="' + triggerSub + '"]').classList.add('submenu-active');
+					submenus();
+				}
+			}
+		}
 
-// Initialize submenus
-submenus();
+		// Initialize submenus
+		submenus();
 
 		//Search Page
 		var searchField = document.querySelectorAll('[data-search]');
